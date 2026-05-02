@@ -1,0 +1,378 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--nav:#0D1117;--nav-text:rgba(255,255,255,0.55);--nav-active:rgba(255,255,255,0.95);
+--surface:var(--color-background-primary);--surface2:var(--color-background-secondary);
+--border:var(--color-border-tertiary);--text:var(--color-text-primary);--text2:var(--color-text-secondary);
+--accent:#00B894;--accent2:#0984E3;--warn:#F39C12;--danger:#E74C3C;
+--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+}
+.fit-wrap{display:flex;height:640px;border:0.5px solid var(--border);border-radius:var(--border-radius-lg);overflow:hidden;font-family:var(--font-body);background:var(--surface)}
+.fit-nav{width:200px;background:var(--nav);flex-shrink:0;display:flex;flex-direction:column;padding:0}
+.fit-logo{padding:20px 16px 16px;border-bottom:0.5px solid rgba(255,255,255,0.08)}
+.fit-logo-mark{font-family:var(--font-head);font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.5px}
+.fit-logo-mark span{color:var(--accent)}
+.fit-logo-sub{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.nav-section{padding:16px 8px 4px;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.2);font-family:var(--font-head)}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;margin:1px 4px;border-radius:6px;cursor:pointer;transition:all 0.15s;color:var(--nav-text);font-size:13px;font-weight:400}
+.nav-item:hover{background:rgba(255,255,255,0.06);color:var(--nav-active)}
+.nav-item.active{background:rgba(0,184,148,0.15);color:var(--accent)}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--warn);color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:500}
+.nav-footer{margin-top:auto;padding:12px 8px;border-top:0.5px solid rgba(255,255,255,0.08)}
+.nav-user{display:flex;align-items:center;gap:10px;padding:8px 8px}
+.nav-avatar{width:28px;height:28px;border-radius:50%;background:rgba(0,184,148,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--accent)}
+.nav-name{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.2}
+.nav-role{font-size:10px;color:rgba(255,255,255,0.3)}
+.fit-main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.fit-topbar{padding:16px 24px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.fit-page-title{font-family:var(--font-head);font-size:16px;font-weight:600;color:var(--text)}
+.fit-page-sub{font-size:12px;color:var(--text2);margin-top:1px}
+.topbar-actions{display:flex;gap:8px;align-items:center}
+.btn{padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--font-body);transition:all 0.15s}
+.btn:hover{background:var(--surface2)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{opacity:0.88}
+.btn-sm{padding:5px 10px;font-size:11px}
+.fit-content{flex:1;overflow-y:auto;padding:20px 24px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.kpi-card{background:var(--surface2);border-radius:var(--border-radius-md);padding:14px 16px;position:relative;overflow:hidden}
+.kpi-label{font-size:11px;color:var(--text2);letter-spacing:0.3px;margin-bottom:6px}
+.kpi-value{font-family:var(--font-head);font-size:22px;font-weight:600;color:var(--text);line-height:1}
+.kpi-delta{font-size:11px;margin-top:5px}
+.kpi-delta.up{color:var(--accent)}
+.kpi-delta.warn{color:var(--warn)}
+.kpi-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.3}
+.kpi-bar.warn{background:var(--warn)}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-title{font-family:var(--font-head);font-size:13px;font-weight:600;color:var(--text)}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--surface2);border:0.5px solid var(--border);border-radius:6px;padding:6px 12px;font-size:12px;color:var(--text2);width:200px}
+.search-box input{border:none;background:transparent;font-size:12px;color:var(--text);outline:none;width:100%;font-family:var(--font-body)}
+.search-box input::placeholder{color:var(--text2)}
+.member-table{width:100%;border-collapse:collapse}
+.member-table th{font-size:10px;letter-spacing:0.8px;text-transform:uppercase;color:var(--text2);padding:8px 12px;text-align:left;border-bottom:0.5px solid var(--border);font-weight:500;white-space:nowrap}
+.member-table td{padding:10px 12px;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--text);vertical-align:middle}
+.member-table tr:hover td{background:var(--surface2);cursor:pointer}
+.member-table tr.selected td{background:rgba(0,184,148,0.06)}
+.avatar-cell{display:flex;align-items:center;gap:10px}
+.m-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.m-name{font-size:13px;font-weight:500;color:var(--text)}
+.m-phone{font-size:11px;color:var(--text2)}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:500;white-space:nowrap}
+.badge-active{background:#E1F5EE;color:#0F6E56}
+.badge-frozen{background:#E6F1FB;color:#185FA5}
+.badge-expiring{background:#FAEEDA;color:#854F0B}
+.badge-cancelled{background:#FCEBEB;color:#A32D2D}
+.badge-pending{background:#F1EFE8;color:#5F5E5A}
+.panel-overlay{position:absolute;top:0;right:0;bottom:0;width:320px;background:var(--surface);border-left:0.5px solid var(--border);transform:translateX(100%);transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;z-index:10}
+.panel-overlay.open{transform:translateX(0)}
+.panel-header{padding:16px 20px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.panel-close{background:none;border:0.5px solid var(--border);border-radius:4px;width:24px;height:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:14px}
+.panel-close:hover{background:var(--surface2)}
+.panel-body{flex:1;overflow-y:auto;padding:16px 20px}
+.panel-section{margin-bottom:20px}
+.panel-section-label{font-size:10px;letter-spacing:0.8px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;font-weight:500}
+.panel-avatar-row{display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.p-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600}
+.p-name{font-family:var(--font-head);font-size:16px;font-weight:600;color:var(--text)}
+.p-phone{font-size:12px;color:var(--text2);margin-top:2px}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+.info-row:last-child{border-bottom:none}
+.info-label{color:var(--text2)}
+.info-value{color:var(--text);font-weight:500}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.action-btn{padding:10px 8px;border-radius:6px;border:0.5px solid var(--border);background:var(--surface);cursor:pointer;font-size:12px;font-weight:500;color:var(--text);font-family:var(--font-body);text-align:center;transition:all 0.15s}
+.action-btn:hover{background:var(--surface2)}
+.action-btn.freeze{color:#185FA5;border-color:#B5D4F4}
+.action-btn.freeze:hover{background:#E6F1FB}
+.action-btn.whatsapp{color:#0F6E56;border-color:#9FE1CB}
+.action-btn.whatsapp:hover{background:#E1F5EE}
+.action-btn.payment{color:#3C3489;border-color:#CECBF6}
+.action-btn.payment:hover{background:#EEEDFE}
+.action-btn.danger{color:#A32D2D;border-color:#F7C1C1}
+.action-btn.danger:hover{background:#FCEBEB}
+.invoice-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+.invoice-row:last-child{border-bottom:none}
+.inv-num{font-weight:500;color:var(--text);font-size:11px}
+.inv-date{color:var(--text2);font-size:11px}
+.inv-amount{font-weight:600;color:var(--text);font-family:var(--font-head)}
+.toast{position:absolute;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--nav);color:#fff;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);white-space:nowrap;z-index:20}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.expiry-alert{background:#FAEEDA;border:0.5px solid #FAC775;border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.expiry-alert-text{font-size:12px;color:#633806}
+.expiry-alert-text strong{font-weight:600}
+.expiry-view{font-size:11px;color:#854F0B;cursor:pointer;font-weight:500;text-decoration:underline}
+.counter{display:inline-block}
+.fit-inner{position:relative;flex:1;overflow:hidden;display:flex;flex-direction:column}
+</style>
+
+<div class="fit-wrap">
+  <nav class="fit-nav">
+    <div class="fit-logo">
+      <div class="fit-logo-mark">fit<span>.</span></div>
+      <div class="fit-logo-sub">Gym OS</div>
+    </div>
+    <div class="nav-section">Operations</div>
+    <div class="nav-item active" onclick="showPage('dashboard')"><span class="nav-dot"></span>Dashboard</div>
+    <div class="nav-item" onclick="showPage('members')"><span class="nav-dot"></span>Members<span class="nav-badge">3</span></div>
+    <div class="nav-item" onclick="showPage('billing')"><span class="nav-dot"></span>Billing</div>
+    <div class="nav-item" onclick="showPage('schedule')"><span class="nav-dot"></span>Schedule</div>
+    <div class="nav-section">Management</div>
+    <div class="nav-item" onclick="showPage('plans')"><span class="nav-dot"></span>Plans</div>
+    <div class="nav-item" onclick="showPage('staff')"><span class="nav-dot"></span>Staff</div>
+    <div class="nav-item" onclick="showPage('devices')"><span class="nav-dot"></span>Devices</div>
+    <div class="nav-item" onclick="showPage('analytics')"><span class="nav-dot"></span>Analytics</div>
+    <div class="nav-footer">
+      <div class="nav-user">
+        <div class="nav-avatar">DG</div>
+        <div><div class="nav-name">Demo Gym</div><div class="nav-role">Owner</div></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="fit-inner">
+    <div id="page-dashboard">
+      <div class="fit-topbar">
+        <div>
+          <div class="fit-page-title">Good morning, Demo Gym</div>
+          <div class="fit-page-sub">Thursday, 19 March 2026 · 12 active staff</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-sm" onclick="showToast('Feature coming in Phase 5')">Export</button>
+          <button class="btn btn-primary btn-sm" onclick="showPage('members');setTimeout(()=>openPanel(0),300)">+ Add Member</button>
+        </div>
+      </div>
+      <div class="fit-content">
+        <div class="expiry-alert">
+          <div class="expiry-alert-text"><strong>3 memberships</strong> expiring within 7 days — renewal nudges queued via WhatsApp</div>
+          <span class="expiry-view" onclick="showPage('members')">View all</span>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Monthly Revenue</div><div class="kpi-value">₹<span class="counter" data-target="2,84,600" data-raw="284600">0</span></div><div class="kpi-delta up">↑ 18% vs last month</div><div class="kpi-bar"></div></div>
+          <div class="kpi-card"><div class="kpi-label">Active Members</div><div class="kpi-value"><span class="counter" data-target="347" data-raw="347">0</span></div><div class="kpi-delta up">↑ 24 this month</div><div class="kpi-bar"></div></div>
+          <div class="kpi-card"><div class="kpi-label">Expiring Soon</div><div class="kpi-value"><span class="counter" data-target="3" data-raw="3">0</span></div><div class="kpi-delta warn">Within 7 days</div><div class="kpi-bar warn"></div></div>
+          <div class="kpi-card"><div class="kpi-label">Collection Rate</div><div class="kpi-value"><span class="counter" data-target="94" data-raw="94">0</span>%</div><div class="kpi-delta up">↑ 6% via WhatsApp</div><div class="kpi-bar"></div></div>
+        </div>
+        <div class="section-header"><div class="section-title">Recent Activity</div></div>
+        <table class="member-table">
+          <thead><tr><th>Member</th><th>Action</th><th>Plan</th><th>Amount</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr><td><div class="avatar-cell"><div class="m-avatar" style="background:#E1F5EE;color:#0F6E56">AP</div><div><div class="m-name">Asha Patel</div></div></div></td><td><span class="badge badge-active">Payment received</span></td><td>Monthly Pro</td><td style="font-weight:600">₹11,800</td><td style="color:var(--text2);font-size:12px">2 min ago</td></tr>
+            <tr><td><div class="avatar-cell"><div class="m-avatar" style="background:#FAEEDA;color:#854F0B">RK</div><div><div class="m-name">Rahul Kumar</div></div></div></td><td><span class="badge badge-expiring">Renewal nudge sent</span></td><td>Quarterly</td><td style="color:var(--text2)">—</td><td style="color:var(--text2);font-size:12px">47 min ago</td></tr>
+            <tr><td><div class="avatar-cell"><div class="m-avatar" style="background:#E6F1FB;color:#185FA5">SP</div><div><div class="m-name">Sneha Pillai</div></div></div></td><td><span class="badge badge-frozen">Membership frozen</span></td><td>Monthly</td><td style="color:var(--text2)">—</td><td style="color:var(--text2);font-size:12px">2 hr ago</td></tr>
+            <tr><td><div class="avatar-cell"><div class="m-avatar" style="background:#EEEDFE;color:#3C3489">VN</div><div><div class="m-name">Vikram Nair</div></div></div></td><td><span class="badge badge-active">Enrolled</span></td><td>Annual Elite</td><td style="font-weight:600">₹42,000</td><td style="color:var(--text2);font-size:12px">Yesterday</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="page-members" style="display:none;flex:1;overflow:hidden;display:none;flex-direction:column">
+      <div class="fit-topbar">
+        <div>
+          <div class="fit-page-title">Members</div>
+          <div class="fit-page-sub">347 active · 3 expiring · 2 frozen</div>
+        </div>
+        <div class="topbar-actions">
+          <div class="search-box"><span style="color:var(--text2);font-size:12px">⌕</span><input placeholder="Search name, phone..." id="search-input" oninput="filterMembers()" /></div>
+          <button class="btn btn-primary btn-sm" onclick="openPanel(0)">+ Add Member</button>
+        </div>
+      </div>
+      <div class="fit-content" style="flex:1;overflow-y:auto">
+        <table class="member-table" id="members-table">
+          <thead><tr><th>Member</th><th>Status</th><th>Plan</th><th>Expires</th><th>Outstanding</th><th>Actions</th></tr></thead>
+          <tbody id="members-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="page-billing" style="display:none;flex-direction:column">
+      <div class="fit-topbar">
+        <div><div class="fit-page-title">Billing</div><div class="fit-page-sub">March 2026 · GST-compliant invoicing</div></div>
+        <div class="topbar-actions"><button class="btn btn-sm" onclick="showToast('Tally export ready')">Export to Tally</button><button class="btn btn-primary btn-sm" onclick="showToast('Invoice INV-2026-0005 created')">+ New Invoice</button></div>
+      </div>
+      <div class="fit-content">
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="kpi-card"><div class="kpi-label">Invoiced (March)</div><div class="kpi-value">₹3,24,400</div><div class="kpi-delta up">42 invoices</div><div class="kpi-bar"></div></div>
+          <div class="kpi-card"><div class="kpi-label">Collected</div><div class="kpi-value">₹2,84,600</div><div class="kpi-delta up">88% collection</div><div class="kpi-bar"></div></div>
+          <div class="kpi-card"><div class="kpi-label">Pending</div><div class="kpi-value">₹39,800</div><div class="kpi-delta warn">6 invoices</div><div class="kpi-bar warn"></div></div>
+        </div>
+        <div class="section-header"><div class="section-title">Recent Invoices</div></div>
+        <table class="member-table">
+          <thead><tr><th>Invoice No.</th><th>Member</th><th>Plan</th><th>Subtotal</th><th>CGST</th><th>SGST</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td style="font-family:var(--font-head);font-size:12px">INV-2026-0001</td><td>Asha Patel</td><td>Monthly Pro</td><td>₹10,000</td><td>₹900</td><td>₹900</td><td style="font-weight:600">₹11,800</td><td><span class="badge badge-active">Paid</span></td></tr>
+            <tr><td style="font-family:var(--font-head);font-size:12px">INV-2026-0002</td><td>Rahul Kumar</td><td>Quarterly</td><td>₹24,000</td><td>₹2,160</td><td>₹2,160</td><td style="font-weight:600">₹28,320</td><td><span class="badge badge-expiring">Pending</span></td></tr>
+            <tr><td style="font-family:var(--font-head);font-size:12px">INV-2026-0003</td><td>Vikram Nair</td><td>Annual Elite</td><td>₹35,593</td><td>₹3,203</td><td>₹3,203</td><td style="font-weight:600">₹42,000</td><td><span class="badge badge-active">Paid</span></td></tr>
+            <tr><td style="font-family:var(--font-head);font-size:12px">INV-2026-0004</td><td>Sneha Pillai</td><td>Monthly</td><td>₹5,000</td><td>₹450</td><td>₹450</td><td style="font-weight:600">₹5,900</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="page-placeholder" style="display:none;flex-direction:column">
+      <div class="fit-topbar"><div><div class="fit-page-title" id="placeholder-title">Page</div><div class="fit-page-sub">Coming in the next sprint</div></div></div>
+      <div class="fit-content" style="display:flex;align-items:center;justify-content:center;flex:1;flex-direction:column;gap:12px">
+        <div style="font-size:32px;opacity:0.2">⬡</div>
+        <div style="font-size:14px;color:var(--text2)">This module is in development</div>
+        <button class="btn btn-sm" onclick="showPage('dashboard')">Back to Dashboard</button>
+      </div>
+    </div>
+
+    <div class="panel-overlay" id="member-panel">
+      <div class="panel-header">
+        <div style="font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--text)" id="panel-title">Member Detail</div>
+        <button class="panel-close" onclick="closePanel()">✕</button>
+      </div>
+      <div class="panel-body" id="panel-body"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<script>
+const members=[
+  {id:0,name:"Asha Patel",phone:"9111111111",initials:"AP",color:"#E1F5EE",textColor:"#0F6E56",status:"active",plan:"Monthly Pro",expires:"2026-04-11",amount:"₹11,800",outstanding:"—",joined:"2025-08-14",email:"asha.patel@example.com",invoices:[{no:"INV-2026-0001",date:"18 Mar 2026",amount:"₹11,800",status:"paid"},{no:"INV-2025-0048",date:"18 Feb 2026",amount:"₹11,800",status:"paid"}]},
+  {id:1,name:"Rahul Kumar",phone:"9222222222",initials:"RK",color:"#FAEEDA",textColor:"#854F0B",status:"expiring",plan:"Quarterly",expires:"2026-03-26",amount:"₹28,320",outstanding:"₹28,320",joined:"2025-06-01",email:"rahul.k@example.com",invoices:[{no:"INV-2026-0002",date:"01 Mar 2026",amount:"₹28,320",status:"pending"}]},
+  {id:2,name:"Sneha Pillai",phone:"9333333333",initials:"SP",color:"#E6F1FB",textColor:"#185FA5",status:"frozen",plan:"Monthly",expires:"2026-04-05",amount:"₹5,900",outstanding:"—",joined:"2025-11-20",email:"sneha.p@example.com",invoices:[{no:"INV-2026-0004",date:"05 Mar 2026",amount:"₹5,900",status:"frozen"}]},
+  {id:3,name:"Vikram Nair",phone:"9444444444",initials:"VN",color:"#EEEDFE",textColor:"#3C3489",status:"active",plan:"Annual Elite",expires:"2027-03-01",amount:"₹42,000",outstanding:"—",joined:"2026-03-01",email:"vikram.n@example.com",invoices:[{no:"INV-2026-0003",date:"01 Mar 2026",amount:"₹42,000",status:"paid"}]},
+  {id:4,name:"Priya Sharma",phone:"9555555555",initials:"PS",color:"#FCEBEB",textColor:"#A32D2D",status:"expiring",plan:"Monthly Pro",expires:"2026-03-22",amount:"₹11,800",outstanding:"₹11,800",joined:"2025-09-22",email:"priya.s@example.com",invoices:[{no:"INV-2026-0005",date:"22 Feb 2026",amount:"₹11,800",status:"pending"}]},
+  {id:5,name:"Arjun Mehta",phone:"9666666666",initials:"AM",color:"#EAF3DE",textColor:"#3B6D11",status:"active",plan:"Annual",expires:"2027-01-15",amount:"₹30,000",outstanding:"—",joined:"2025-01-15",email:"arjun.m@example.com",invoices:[{no:"INV-2025-0001",date:"15 Jan 2026",amount:"₹30,000",status:"paid"}]},
+];
+
+const statusBadge={active:'<span class="badge badge-active">Active</span>',frozen:'<span class="badge badge-frozen">Frozen</span>',expiring:'<span class="badge badge-expiring">Expiring</span>',cancelled:'<span class="badge badge-cancelled">Cancelled</span>'};
+let selectedMember=null;
+let currentPage='dashboard';
+
+function renderMembers(data){
+  const tb=document.getElementById('members-tbody');
+  tb.innerHTML=data.map(m=>`
+    <tr class="${selectedMember&&selectedMember.id===m.id?'selected':''}" onclick="openPanel(${m.id})">
+      <td><div class="avatar-cell"><div class="m-avatar" style="background:${m.color};color:${m.textColor}">${m.initials}</div><div><div class="m-name">${m.name}</div><div class="m-phone">${m.phone}</div></div></div></td>
+      <td>${statusBadge[m.status]||''}</td>
+      <td style="font-size:12px">${m.plan}</td>
+      <td style="font-size:12px;color:var(--text2)">${m.expires}</td>
+      <td style="font-size:12px;font-weight:${m.outstanding!=='—'?'600':'400'};color:${m.outstanding!=='—'?'var(--danger)':'var(--text2)'}">${m.outstanding}</td>
+      <td><button class="btn btn-sm" onclick="event.stopPropagation();openPanel(${m.id})">View</button></td>
+    </tr>`).join('');
+}
+
+function filterMembers(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  renderMembers(q?members.filter(m=>m.name.toLowerCase().includes(q)||m.phone.includes(q)):members);
+}
+
+function openPanel(id){
+  selectedMember=members[id];
+  const m=selectedMember;
+  const invHtml=m.invoices.map(inv=>`<div class="invoice-row"><div><div class="inv-num">${inv.no}</div><div class="inv-date">${inv.date}</div></div><div style="display:flex;align-items:center;gap:8px"><div class="inv-amount">${inv.amount}</div><span class="badge badge-${inv.status==='paid'?'active':inv.status==='pending'?'expiring':'frozen'}">${inv.status}</span></div></div>`).join('');
+  document.getElementById('panel-title').textContent=m.name;
+  document.getElementById('panel-body').innerHTML=`
+    <div class="panel-section">
+      <div class="panel-avatar-row">
+        <div class="p-avatar" style="background:${m.color};color:${m.textColor}">${m.initials}</div>
+        <div><div class="p-name">${m.name}</div><div class="p-phone">${m.phone}</div></div>
+      </div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-label">Membership</div>
+      <div class="info-row"><span class="info-label">Status</span>${statusBadge[m.status]}</div>
+      <div class="info-row"><span class="info-label">Plan</span><span class="info-value">${m.plan}</span></div>
+      <div class="info-row"><span class="info-label">Expires</span><span class="info-value" style="color:${m.status==='expiring'?'var(--warn)':'var(--text)'}">${m.expires}</span></div>
+      <div class="info-row"><span class="info-label">Joined</span><span class="info-value">${m.joined}</span></div>
+      <div class="info-row"><span class="info-label">Outstanding</span><span class="info-value" style="color:${m.outstanding!=='—'?'var(--danger)':'var(--text)'}">${m.outstanding}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-label">Quick Actions</div>
+      <div class="action-grid">
+        <button class="action-btn ${m.status==='frozen'?'active':'freeze'}" onclick="toggleFreeze(${id})">${m.status==='frozen'?'Unfreeze':'Freeze'}</button>
+        <button class="action-btn whatsapp" onclick="sendWhatsApp(${id})">WhatsApp nudge</button>
+        <button class="action-btn payment" onclick="recordPayment(${id})">Record payment</button>
+        <button class="action-btn danger" onclick="showToast('Cancel flow coming soon')">Cancel plan</button>
+      </div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-label">Invoice History</div>
+      ${invHtml}
+    </div>`;
+  document.getElementById('member-panel').classList.add('open');
+  renderMembers(members);
+}
+
+function closePanel(){
+  document.getElementById('member-panel').classList.remove('open');
+  selectedMember=null;
+  renderMembers(members);
+}
+
+function toggleFreeze(id){
+  const m=members[id];
+  if(m.status==='frozen'){m.status='active';showToast('Membership reactivated · WhatsApp sent');}
+  else{m.status='frozen';showToast('Membership frozen · Member notified');}
+  openPanel(id);
+  renderMembers(members);
+}
+
+function sendWhatsApp(id){
+  const m=members[id];
+  showToast('WhatsApp nudge queued for '+m.name.split(' ')[0]);
+}
+
+function recordPayment(id){
+  const m=members[id];
+  m.outstanding='—';
+  showToast('Payment recorded · INV marked paid · Receipt sent');
+  openPanel(id);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function showPage(page){
+  ['dashboard','members','billing','placeholder'].forEach(p=>{
+    const el=document.getElementById('page-'+p);
+    if(el){el.style.display='none';}
+  });
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const pages=['dashboard','members','billing','schedule','plans','staff','devices','analytics'];
+  const navItems=document.querySelectorAll('.nav-item');
+  const idx=pages.indexOf(page);
+  if(idx>=0&&navItems[idx])navItems[idx].classList.add('active');
+  if(['schedule','plans','staff','devices','analytics'].includes(page)){
+    document.getElementById('page-placeholder').style.display='flex';
+    document.getElementById('placeholder-title').textContent=page.charAt(0).toUpperCase()+page.slice(1);
+  } else {
+    const el=document.getElementById('page-'+page);
+    if(el){el.style.display='flex';el.style.flexDirection='column';}
+  }
+  currentPage=page;
+  if(page==='members')renderMembers(members);
+  closePanel();
+}
+
+function animateCounters(){
+  document.querySelectorAll('.counter').forEach(el=>{
+    const raw=parseInt((el.dataset.raw||'0').replace(/,/g,''));
+    const target_str=el.dataset.target||'0';
+    let start=0;const dur=1200;const startTime=performance.now();
+    function step(now){
+      const p=Math.min((now-startTime)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=Math.round(ease*raw);
+      if(raw>1000){el.textContent=val.toLocaleString('en-IN');}
+      else{el.textContent=val;}
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=target_str;
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+showPage('dashboard');
+setTimeout(animateCounters,100);
+</script>

@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: fit
+      POSTGRES_PASSWORD: fit
+      POSTGRES_DB: fit
+    ports:
+      - "5432:5432"
+    volumes:
+      - fit_pg:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+volumes:
+  fit_pg:
